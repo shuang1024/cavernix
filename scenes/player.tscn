@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://bulav3npowqpq"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_llstw"]
+[ext_resource type="Texture2D" uid="uid://mc0lkchnfppn" path="res://spritesheets/player/roll.png" id="2_1hp7n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4xgbo"]
+radius = 6.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_llstw")
+
+[node name="Roll" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -2)
+texture = ExtResource("2_1hp7n")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4xgbo")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="SpriteTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="BoostTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="SpriteTimer" to="." method="_on_sprite_timer_timeout"]
+[connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]
