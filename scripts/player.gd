@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
 
-@export var speed = 125
+@export var speed = 110
 var boost = false
+var can_boost = true
 @export var boosted_speed = 250
 @export var jump_power = 250
 var jump_speed = -jump_power
@@ -11,7 +12,7 @@ var direction = "r"
 var frame = 0
 var delta_frame = 0
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity = 700
 
 
 func _physics_process(delta):
@@ -20,10 +21,13 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	if Input.is_action_just_pressed("boost") and not boost:
+	if is_on_floor() and not can_boost:
+		can_boost = true
+	if Input.is_action_just_pressed("boost") and not boost and can_boost:
 		boost = true
+		can_boost = false
 		$BoostTimer.start()
-	if boost:
+	if boost and not is_on_wall():
 		velocity.y = 0
 		if direction == "r":
 			velocity.x = boosted_speed
@@ -64,7 +68,6 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = jump_speed
 
-	print(velocity)
 	move_and_slide()
 
 
