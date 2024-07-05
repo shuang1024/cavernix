@@ -5,7 +5,7 @@ extends CharacterBody2D
 var boost = false
 var can_boost = true
 @export var boosted_speed = 250
-@export var jump_power = 250
+@export var jump_power = 260
 var jump_speed = -jump_power
 
 var direction = "r"

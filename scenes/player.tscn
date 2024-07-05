@@ -19,7 +19,7 @@ hframes = 4
 shape = SubResource("CircleShape2D_4xgbo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
+zoom = Vector2(5, 5)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
@@ -29,7 +29,7 @@ wait_time = 0.05
 autostart = true
 
 [node name="BoostTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.35
 
 [connection signal="timeout" from="SpriteTimer" to="." method="_on_sprite_timer_timeout"]
 [connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]
